@@ -15,7 +15,7 @@ platforms :rbx do
 end
 
 group :test do
-  gem 'rspec',          '~> 3.1.0'
+  gem 'rspec',          '~> 3.4.0'
   gem 'timecop',        '= 0.6.1'
   gem 'rack-test',      '~> 0.5'
   gem 'generator_spec', '~> 0.9'
