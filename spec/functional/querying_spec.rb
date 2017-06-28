@@ -634,7 +634,7 @@ describe "Querying" do
     it "should be chainable" do
       result = [26, 27]
       @query.sort(:age).all.map(&:age).should == result
-      @query.count.should > result.size
+      @query.count.should == result.size
     end
   end
 
@@ -654,7 +654,7 @@ describe "Querying" do
     it "should be chainable" do
       result = [27, 28]
       @query.sort(:age).all.map(&:age).should == result
-      @query.count.should > result.size
+      @query.count.should == result.size
     end
   end
 

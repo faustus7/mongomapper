@@ -11,6 +11,7 @@ gem 'rest-client', '1.6.7'
 
 platforms :ruby do
   gem 'mongo',     '~> 2.0'
+  gem 'plucky', :git => "git://github.com/faustus7/plucky.git"
 end
 
 platforms :rbx do
@@ -18,6 +19,7 @@ platforms :rbx do
 end
 
 group :test do
+  gem 'test-unit',      '~> 3.0'
   gem 'rspec',          '~> 3.4.0'
   gem 'timecop',        '= 0.6.1'
   gem 'rack-test',      '~> 0.5'
@@ -33,10 +35,6 @@ group :test do
 
   platforms :mri_20 do
     gem 'pry'
-  end
-
-  platforms :mri_23 do
-    gem 'byebug'
   end
 
 end

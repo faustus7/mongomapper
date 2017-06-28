@@ -300,7 +300,7 @@ describe "Support" do
     end
 
     it "should be time in utc if time" do
-      utc_str = RUBY_PLATFORM != "java" ? 'UTC' : "GMT"
+      utc_str ='UTC'
       Time.to_mongo(Time.local(2009, 8, 15, 0, 0, 0)).zone.should == utc_str
     end
 

@@ -46,7 +46,8 @@ describe "Stats" do
       expect(Docs.stats.avg_obj_size).to eq(get_stats['avgObjSize'])
     end
 
-    it "should have the correct number of extents" do
+    # MMapV1 only
+    xit "should have the correct number of extents" do
       expect(Docs.stats.num_extents).to eq(get_stats['numExtents'])
     end
 
@@ -54,15 +55,18 @@ describe "Stats" do
       expect(Docs.stats.nindexes).to eq(get_stats['nindexes'])
     end
 
-    it "should have the correct last extent size" do
+    # MMapV1 only
+    xit "should have the correct last extent size" do
       expect(Docs.stats.last_extent_size).to eq(get_stats['lastExtentSize'])
     end
 
-    it "should have the correct padding factor" do
+    # MMapV1 only
+    xit "should have the correct padding factor" do
       expect(Docs.stats.padding_factor).to eq(get_stats['paddingFactor'])
     end
 
-    it "should have the correct user flags" do
+    # MMapV1 only
+    xit "should have the correct user flags" do
       expect(Docs.stats.user_flags).to eq(get_stats['userFlags'])
     end
 
