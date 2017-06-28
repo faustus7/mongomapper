@@ -138,11 +138,17 @@ module MongoMapper
         update = to_mongo
         query_options = Utils.get_safe_options(options)
 
+        if query_options.any?
+          collection = self.collection.with(write: query_options)
+        else
+          collection = self.collection
+        end
+
         case method
         when :insert
-          collection.insert(update, query_options)
+          collection.insert_one(update, query_options)
         when :save
-          collection.save(update, query_options)
+          collection.update_one({:_id => _id}, update, query_options.merge(upsert: true))
         when :update
           update.stringify_keys!
 
@@ -168,7 +174,7 @@ module MongoMapper
           update_query["$unset"] = unset_values if unset_values.any?
 
           if update_query.any?
-            collection.update(find_query, update_query, query_options)
+            collection.update_one(find_query, update_query, query_options)
           end
         end
       end

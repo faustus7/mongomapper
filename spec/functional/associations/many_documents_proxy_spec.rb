@@ -2,8 +2,8 @@ require 'spec_helper.rb'
 
 describe "ManyDocumentsProxy" do
   before do
-    Project.collection.remove
-    Status.collection.remove
+    Project.collection.drop
+    Status.collection.drop
 
     @pet_class = Doc do
       key :name, String
@@ -810,13 +810,13 @@ describe "ManyDocumentsProxy" do
       class ::Property
         include MongoMapper::Document
       end
-      Property.collection.remove
+      Property.collection.drop
 
       class ::Thing
         include MongoMapper::Document
         key :name, String
       end
-      Thing.collection.remove
+      Thing.collection.drop
     end
 
     after do
@@ -997,7 +997,7 @@ describe "ManyDocumentsProxy" do
 
       lambda do
         @job_title_2.trainings.find_by_slug!('bar')
-      end.should raise_error
+      end.should raise_error(RuntimeError)
     end
 
     it "should scope with an extra where clause on the proxy (regression #2)" do
@@ -1018,7 +1018,7 @@ describe "ManyDocumentsProxy" do
 
       lambda do
         @job_title_2.trainings.find_by_slug!('bar')
-      end.should raise_error
+      end.should raise_error(RuntimeError)
     end
   end
 end

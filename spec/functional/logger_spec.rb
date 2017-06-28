@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe "Logger" do
-  context "with connection that has logger" do
+  context "with connection that has logger", without_connection: true do
     before do
       @output = StringIO.new
       @logger = Logger.new(@output)
-      MongoMapper.connection = Mongo::MongoClient.new('127.0.0.1', 27017, :logger => @logger)
+      MongoMapper.connection = Mongo::Client.new(['127.0.0.1:27017'], :logger => @logger)
     end
 
     it "should be able to get access to that logger" do

@@ -10,8 +10,7 @@ end
 gem 'rest-client', '1.6.7'
 
 platforms :ruby do
-  gem 'mongo',     '~> 1.9'
-  gem 'bson_ext',  '~> 1.9'
+  gem 'mongo',     '~> 2.0'
 end
 
 platforms :rbx do
@@ -19,8 +18,7 @@ platforms :rbx do
 end
 
 group :test do
-  gem 'test-unit',      '~> 3.0'
-  gem 'rspec',          '~> 3.1.0'
+  gem 'rspec',          '~> 3.4.0'
   gem 'timecop',        '= 0.6.1'
   gem 'rack-test',      '~> 0.5'
   gem 'generator_spec', '~> 0.9'
@@ -36,4 +34,9 @@ group :test do
   platforms :mri_20 do
     gem 'pry'
   end
+
+  platforms :mri_23 do
+    gem 'byebug'
+  end
+
 end
