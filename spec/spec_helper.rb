@@ -40,7 +40,7 @@ def Doc(name='Class', &block)
   end
 
   klass.class_eval(&block) if block_given?
-  klass.collection.remove
+  klass.collection.drop
   klass
 end
 
@@ -59,19 +59,20 @@ def EDoc(name='Class', &block)
 end
 
 def drop_indexes(klass)
-  klass.collection.drop_indexes if klass.database.collection_names.include?(klass.collection.name)
+  klass.collection.indexes.drop_all if klass.database.collection_names.include?(klass.collection.name)
 end
 
 log_dir = File.expand_path('../../log', __FILE__)
 FileUtils.mkdir_p(log_dir) unless File.exist?(log_dir)
 logger = Logger.new(log_dir + '/test.log')
 
-MongoMapper.connection = Mongo::MongoClient.new('127.0.0.1', 27017, :logger => logger)
-MongoMapper.database = "test"
-MongoMapper.database.collections.each { |c| c.drop_indexes }
+MongoMapper.connection = Mongo::Client.new(['127.0.0.1:27017'], :database => 'test', :logger => logger)
+MongoMapper.database.collections.each { |c| c.indexes.drop_all }
 Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each {|f| require f}
 
 RSpec.configure do |config|
+  config.example_status_persistence_file_path = "./spec/examples.txt"
+
   config.expect_with :rspec do |c|
     c.syntax = [:should, :expect]
   end

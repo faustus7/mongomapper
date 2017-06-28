@@ -19,7 +19,7 @@ describe "IdentityMap" do
   end
 
   def expects_one_query
-    expect_any_instance_of(Mongo::Collection).to receive(:find_one).once.and_return({})
+    expect_any_instance_of(Mongo::Collection).to receive(:find).once.and_call_original
   end
 
   def clear_identity_map
@@ -420,7 +420,7 @@ describe "IdentityMap" do
           belongs_to :parent, :class_name => 'Item'
           one :blog, :class_name => 'Blog', :foreign_key => 'parent_id'
         end
-        Item.collection.remove
+        Item.collection.drop
 
         class ::Blog < ::Item; end
 

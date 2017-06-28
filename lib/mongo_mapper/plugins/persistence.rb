@@ -39,7 +39,7 @@ module MongoMapper
           if database_name.nil?
             MongoMapper.database
           else
-            connection.db(database_name)
+            connection.use(database_name).database
           end
         end
 
@@ -55,7 +55,11 @@ module MongoMapper
 
         def collection
           assert_supported
-          database.collection(collection_name)
+          database.collection(collection_name, collection_options)
+        end
+
+        def collection_options
+          {}
         end
 
       private
